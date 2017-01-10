@@ -15,7 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from jordbruksmark import views as jbm_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^admin/', admin.site.urls),
+    url(r'^acker/wp_cultivation/(?P<week>.*?)/', jbm_views.week_plan_cultivation_list),
+    url(r'^acker/wp_plant/(?P<week>.*?)/', jbm_views.week_plan_plant_list),
+    url(r'^acker/wp_sowing/(?P<week>.*?)/', jbm_views.week_plan_sowing_list),
+    url(r'^acker/wp_cultivation$', jbm_views.week_plan_cultivation),
+    url(r'^acker/wp_plant$', jbm_views.week_plan_plant),
+    url(r'^acker/wp_sowing$', jbm_views.week_plan_sowing),
 ]

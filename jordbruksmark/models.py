@@ -83,7 +83,6 @@ class Satz(models.Model):
                                  on_delete=models.PROTECT)
     anzucht = models.IntegerField(u'Anzucht',null=True,blank=True)
     g_pro_tausend = models.FloatField(u'g/1000 Pflanzen',null=True,blank=True)
-    anzahl_anzucht = models.IntegerField(u'Anz. Anzucht',null=True,blank=True)
     setzen = models.IntegerField(u'Setzen',null=True,blank=True)
     g_pro_aare = models.IntegerField(u'g/Are',null=True,blank=True)
     saat = models.IntegerField(u'Saat',null=True,blank=True)
@@ -99,8 +98,44 @@ class Satz(models.Model):
     bem_setzen = models.TextField(u'Bem. Setzen', max_length=1000, null=True,blank=True)
     bem_saat = models.TextField(u'Bem. Direktsaat', max_length=1000, null=True,blank=True)
     start_woche = models.IntegerField(u'Startwoche Menge',null=True,blank=True)
-    end_woche = models.IntegerField(u'Endwoche Menge',null=True,blank=True)
+    end_woche = models.IntegerField(u'Endwoche Menge',null=True,blank=True)    
+   
+    @property
+    def geplante_menge(self):
+        result = 0
+        weeks = WochenMenge.objects.filter(week__gte=self.start_woche,week_lte=self.end_woche,kultur=self.kultur)
+        for week in weeks:
+            result = result + week.menge
+        return result
     
+    @property
+    def anz_reihen(self):
+        return round(self.beet_breite*100/self.reihen_abstand)
+    
+    @property
+    def beet_laenge(self):
+        return self.geplante_menge*self.pflanz_abstand/100/self.anz_reihen
+    
+    @property
+    def anz_anzucht(self):
+        return round(self.beet_laenge*100/self.pflanz_abstand*self.anz_reihen*1.1)
+    
+    @property
+    def anz_setzten(self):
+        return round(self.beet_laenge*100/self.pflanz_abstand*self.anz_reihen)
+    
+    @property
+    def saatmenge_g(self):
+        return round(self.g_pro_tausend/1000*self.anz_anzucht,1)
+    
+    @property
+    def eff_flaeche(self):
+        return self.beet_laenge*(self.beet_breite+0.3)
+    
+    @property
+    def beet_flaeche(self):
+        return self.beet_breite*self.beet_laenge    
+   
     def __unicode__(self):
         return u"(%s)%s - %s" % (self.id, self.nummer, self.kultur.name)
     
@@ -108,7 +143,8 @@ class Satz(models.Model):
         verbose_name = u'Satz'
         verbose_name_plural = u'Sätze'
     
-    
-    
+class SpecialRoles(models.Model):
+    class Meta:
+        permissions = (('is_gardener', 'Benutzer ist Gärtner'),)
     
     
