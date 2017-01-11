@@ -1,0 +1,20 @@
+<table>
+<th>
+<td>Kultur</td>
+<td>Satz NR</td>
+<td>Sorte</td>
+<td>Anz Anzucht</td>
+<td>Saatmenge g</td>
+<td>Bem Anzucht</td>
+</th>
+{% for set in sets %}
+<tr>
+<td>{{ set.kultur.name }}</td>
+<td>{{ set.nummer }}</td>
+<td>{{ set.sorte }}</td>
+<td>{{ set.anz_anzucht }}</td>
+<td>{{ set.saatmenge_g }}</td>
+<td>{{ set.bem_anzucht }}</td>
+</tr>	
+{% endfor %}
+</table>

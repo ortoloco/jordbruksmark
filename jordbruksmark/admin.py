@@ -23,7 +23,7 @@ class KulturenAdmin(admin.ModelAdmin):
     list_display = ["__unicode__", "familie_name"]
     search_fields = ["id", "name", "familie__name"]
     def familie_name(self, obj):
-        return obj.famili.name
+        return obj.familie.name
     familie_name.admin_order_field = 'familie__name'
     
 class WochenMengenAdmin(admin.ModelAdmin):

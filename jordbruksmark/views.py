@@ -9,8 +9,10 @@ from jordbruksmark.models import *
 
 @permission_required('jordbruksmark.is_gardener')
 def week_plan_cultivation_list(request, week):
+    print week
     sets = Satz.objects.filter(anzucht=week)
-    render_dict = {
+    print sets
+    renderdict = {
         'sets': sets,
     }
     return render(request, "week_plan_cultivation_list.html", renderdict)
@@ -18,7 +20,7 @@ def week_plan_cultivation_list(request, week):
 @permission_required('jordbruksmark.is_gardener')
 def week_plan_plant_list(request, week):
     sets = Satz.objects.filter(setzen=week)
-    render_dict = {
+    renderdict = {
         'sets': sets,
     }
     return render(request, "week_plan_plant_list.html", renderdict)
@@ -26,7 +28,7 @@ def week_plan_plant_list(request, week):
 @permission_required('jordbruksmark.is_gardener')
 def week_plan_sowing_list(request, week):
     sets = Satz.objects.filter(saat=week)
-    render_dict = {
+    renderdict = {
         'sets': sets,
     }
     return render(request, "week_plan_plant_list.html", renderdict)
