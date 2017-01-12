@@ -1,0 +1,34 @@
+<table border=1>
+<tr>
+<th>Kultur</th>
+<th>Satz NR</th>
+<th>Sorte</th>
+<th>Familie</th>
+<th>Parzelle</th>
+<th>Anz Setzen</th>
+<th>lm</th>
+<th>Breite</th>
+<th>R-Abstand</th>
+<th>Pfl Abstand</th>
+<th>Anz R</th>
+<th>D&uuml;nger Kg</th>
+<th>Bem Setzen</th>
+</tr>
+{% for set in sets %}
+<tr>
+<td>{{ set.kultur.name }}</td>
+<td>{{ set.nummer }}</td>
+<td>{{ set.sorte }}</td>
+<td>{{ set.kultur.familie.name }}</td>
+<td>{{ set.parzelle.name }}</td>
+<td>{{ set.anz_setzten }}</td>
+<td>{{ set.beet_laenge }}</td>
+<td>{{ set.beet_breite }}</td>
+<td>{{ set.reihen_abstand }}</td>
+<td>{{ set.pflanz_abstand }}</td>
+<td>{{ set.anz_reihen }}</td>
+<td>{{ set.duenger_kg }}</td>
+<td>{{ set.bem_setzen }}</td>
+</tr>	
+{% endfor %}
+</table>

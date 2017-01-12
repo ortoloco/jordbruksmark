@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="filter">
+	<table id="filter-table" class="display" width="100%" cellspacing="0">
+		<thead>
+		<tr>
+			<th>Satz NR</th>
+			<th>Kultur</th>
+			<th>Sorte</th>
+			<th>Saatmenge g</th>
+			<th>Familie</th>
+			<th>Düngestufe</th>
+			<th>Düngungsart</th>
+			<th>Parz.</th>
+			<th>Anzucht</th>
+			<th>g/1000 Pflanzen</th>
+			<th>Anz. Anzucht</th>
+			<th>Setzen</th>
+			<th>Anz. Setzen</th>
+			<th>g/Are</th>
+			<th>Saat</th>
+			<th>1. Ernte</th>
+			<th>Ernteschluss</th>
+			<th>Dünger kg 10%N</th>
+			<th>eff. Fläche</th>
+			<th>Beet-Länge</th>
+			<th>Beet-Breite</th>
+			<th>Beet-Fläche</th>
+			<th>Reihenabstand</th>
+			<th>Pflanzabstand</th>
+			<th>Anzahl Reihen</th>
+			<th>Geplante Menge</th>
+			<th>Ertragserwartung</th>
+			<th>Allg. Bemerkungen</th>
+			<th>Bem.  Anzucht</th>
+			<th>Bem. Setzen</th>
+			<th>Bem. Direktsaat</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+		{% for set in sets %}
+		<tr>
+			<td>{{ set.nummer }}</td>
+			<td>{{ set.kultur.name }}</td>
+			<td>{{ set.sorte }}</td>
+			<td>{{ set.saatmenge_g }}</td>
+			<td>{{ set.kultur.familie.name }}</td>
+			<td>{{ set.duengungsstufe.name }}</td>
+			<td>{{ set.duenger.name }}</td>
+			<td>{{ set.parzelle.code }}</td>
+			<td>{{ set.anzucht }}</td>
+			<td>{{ set.g_pro_tausend }}</td>
+			<td>{{ set.anz_anzucht }}</td>
+			<td>{{ set.setzen }}</td>
+			<td>{{ set.anz_setzten }}</td>
+			<td>{{ set.g_pro_aare }}</td>
+			<td>{{ set.saat }}</td>
+			<td>{{ set.erste_ernte }}</td>
+			<td>{{ set.ernteschluss }}</td>
+			<td>{{ set.duenger_kg }}</td>
+			<td>{{ set.eff_flaeche }}</td>
+			<td>{{ set.beet_laenge }}</td>
+			<td>{{ set.beet_breite }}</td>
+			<td>{{ set.beet_flaeche }}</td>
+			<td>{{ set.reihen_abstand }}</td>
+			<td>{{ set.pflanz_abstand }}</td>
+			<td>{{ set.anz_reihen }}</td>
+			<td>{{ set.geplante_menge }}</td>
+			<td>{{ set.ertrag_erwartung }}</td>
+			<td>{{ set.bemerkung }}</td>
+			<td>{{ set.bem_anzucht }}</td>
+			<td>{{ set.bem_setzen }}</td>
+			<td>{{ set.bem_saat }}</td>
+			
+		</tr>	
+		{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+	<link rel="stylesheet" type="text/css" href="/static/external/datatables/datatables.min.css"/>
+	<script type="text/javascript" src="/static/external/datatables/datatables.min.js"></script>
+	<script type="text/javascript" src="/static/external/require.js" data-main="/static/js/init_sets.js"></script>
+{% endblock %}

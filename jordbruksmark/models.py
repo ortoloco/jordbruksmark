@@ -103,7 +103,7 @@ class Satz(models.Model):
     @property
     def geplante_menge(self):
         result = 0
-        weeks = WochenMenge.objects.filter(week__gte=self.start_woche,week_lte=self.end_woche,kultur=self.kultur)
+        weeks = WochenMenge.objects.filter(kultur=self.kultur).filter(woche__gte=self.start_woche).filter(woche__lte=self.end_woche)
         for week in weeks:
             result = result + week.menge
         return result

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3> Wochenplan Setzen</h3><p/>
+Woche:  
+ <select id="week_select">
+    {% for i in "x"|rjust:"53" %}
+         <option value="{{ forloop.counter0 }}">{{ forloop.counter0 }}</option> 
+    {% endfor %}
+</select> 
+<div id=list>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="/static/external/require.js" data-main="/static/js/init_wp_plant.js"></script>
+{% endblock %}

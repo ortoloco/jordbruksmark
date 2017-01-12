@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table class="week_line week_table" cellpadding="0"; cellspacing="0">
+<tr class="week_line">
+	{% for item in header %}
+	<th class="week_line">{{ item }}</th>
+	{% endfor %}
+</tr>
+{% for line in data %}
+<tr class="week_line">
+	<td class="week_line">{{ line.name }}</td>
+	{% for item in line.values %}
+	<td class="week_line"><input id="{{ item.id }}" value="{{ item.value }}" type="text" class="week_input"/></td>
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}
+
+{% block scripts %}
+	<link rel="stylesheet" type="text/css" href="/static/css/jordbruksmark.css"/>
+	<script type="text/javascript" src="/static/external/require.js" data-main="/static/js/init_weeks.js"></script>
+{% endblock %}

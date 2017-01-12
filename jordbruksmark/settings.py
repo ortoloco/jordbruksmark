@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'jordbruksmark.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': os.environ.get('ORTOLOCO_DATABASE_ENGINE'), # 'django.db.backends.postgresql_psycopg2', #'django.db.backends.sqlite3', # Add , 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': os.environ.get('ORTOLOCO_DATABASE_NAME'), #''ortoloco', # 'db.sqlite',                      # Or path to database file if using sqlite3.
+        'USER': os.environ.get('ORTOLOCO_DATABASE_USER'), #''ortoloco', # The following settings are not used with sqlite3:
+        'PASSWORD': os.environ.get('ORTOLOCO_DATABASE_PASSWORD'), #''ortoloco',
+        'HOST': os.environ.get('ORTOLOCO_DATABASE_HOST'), #'localhost', # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': os.environ.get('ORTOLOCO_DATABASE_PORT', False), #''', # Set to empty string for default.
     }
 }
 
@@ -108,3 +112,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
